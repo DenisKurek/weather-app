@@ -1,14 +1,22 @@
-import React, { useState } from "react";
-import LineChart from "./components/LineChart";
+import React from "react";
 import Navbar from "./components/Navbar";
+import ArchiveDataPage from "./pages/ArchiveDataPage";
+import CurentDataPage from "./pages/CurentDataPage";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import RootLayout from "./pages/RootLayout";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <RootLayout />,
+    children: [
+      { path: "/archive", element: <ArchiveDataPage /> },
+      { path: "/current", element: <CurentDataPage /> },
+    ],
+  },
+]);
 function App() {
-  const [data, setData] = useState([]);
-  return (
-    <div className="d-flex" style={{ flexGrow: 1 }}>
-      <Navbar onReciveData={setData} />
-      <LineChart data={data} />
-    </div>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

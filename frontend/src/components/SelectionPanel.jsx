@@ -32,9 +32,8 @@ export default function City(props) {
 
   return (
     <form
-      className="d-flex flex-wrap border m-1"
+      className="d-flex flex-wrap m-3"
       style={{
-        backgroundColor: "lightblue",
         flexDirection: "column",
       }}
       onSubmit={(ev) => {

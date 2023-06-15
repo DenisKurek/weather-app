@@ -37,12 +37,17 @@ export default function DataInfoPanel(props) {
       </select>
       {selectedData &&
         getInfo(selectedData).map((data) => {
-          console.log(data);
           return (
-            <div className="d-flex" style={{ justifyContent: "center" }}>
-              <p>{data[0]} :</p>
-              <p>{data[1].toFixed(2)}</p>
-            </div>
+            <table className="table table-bordered table-striped table-fixed">
+              <tbody>
+                <tr>
+                  <td className="fw-bold" style={{ width: "50%" }}>
+                    {data[0]}:
+                  </td>
+                  <td style={{ width: "50%" }}>{data[1].toFixed(2)}</td>
+                </tr>
+              </tbody>
+            </table>
           );
         })}
     </div>

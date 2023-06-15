@@ -48,6 +48,18 @@ function random_rgba() {
   );
 }
 
+function getColor(index) {
+  const colors = [
+    "rgba(255, 0, 0,1)",
+    "rgba(0, 255, 0,1)",
+    "rgba(0, 0, 255,1)",
+    "rgba(255, 165, 0,1)",
+    "rgba(0, 0, 128,1)",
+    "rgba(128, 0, 128,1)",
+  ];
+  return index < 6 ? colors[index] : random_rgba();
+}
+
 export default function LineChart(props) {
   const [chartData, setChartData] = useState(null);
 
@@ -58,9 +70,11 @@ export default function LineChart(props) {
       datasets: [],
     };
     const data = props.data;
+    let index = 0;
     for (let [key] of Object.entries(data[0])) {
       if (key !== "dateId" && key !== "stationId") {
-        const color = random_rgba();
+        const color = getColor(index);
+        index++;
         chartDataset.datasets.push({
           label: key,
           data: [],
