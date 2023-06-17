@@ -12,8 +12,12 @@ export default function WeatherPanel(props) {
 
   useEffect(() => {
     async function getAppid() {
-      const response = await axios.get("http://localhost:8080/api/appid");
-      setAppid(response.data);
+      try {
+        const response = await axios.get("http://localhost:8080/api/appid");
+        setAppid(response.data);
+      } catch (error) {
+        setError("server is not responding");
+      }
     }
     getAppid();
   }, []);

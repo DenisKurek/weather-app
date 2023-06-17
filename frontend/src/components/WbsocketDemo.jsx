@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import SockJS from "sockjs-client";
 import Stomp from "stompjs";
+import ErrorMessage from "../UI/ErrorMessage";
 import Loader from "../UI/Loader";
 import LineChart from "./LineChart";
 
 export default function WebSocketComponent() {
   const [connected, setConnected] = useState(false);
+  const [error, setError] = useState(null);
   const [data, setData] = useState([]);
 
   let lastBody = " ";
@@ -28,6 +30,7 @@ export default function WebSocketComponent() {
       {},
       function (frame) {
         setConnected(true);
+        setError(null);
         console.log("Connected: " + frame);
         stompClient.subscribe("/topic/greetings", function sendData(frame) {
           if (lastBody !== frame.body) {
@@ -38,7 +41,7 @@ export default function WebSocketComponent() {
       },
       (error) => {
         setConnected(false);
-        console.error("WebSocket connection error:", error);
+        setError("WebSocket connection error: " + error);
       }
     );
 
@@ -53,7 +56,8 @@ export default function WebSocketComponent() {
 
   return (
     <div className=".d-flex" style={{ flexGrow: 1 }}>
-      {data.length === 0 ? <Loader /> : <LineChart data={data} />}
+      {error && <ErrorMessage message={error} />}
+      {!error && data.length === 0 ? <Loader /> : <LineChart data={data} />}
     </div>
   );
 }

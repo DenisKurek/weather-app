@@ -13,17 +13,21 @@ export default function City(props) {
 
   useEffect(() => {
     async function getCities() {
-      const response = await axios.get(
-        "http://localhost:8080/api/citiesForDateRange",
-        {
-          params: {
-            beginDate: DateIdConverter(beginDate) + "00",
-            endDate: DateIdConverter(endDate) + "25",
-          },
-        }
-      );
-      const data = response.data;
-      setCities(data);
+      try {
+        const response = await axios.get(
+          "http://localhost:8080/api/citiesForDateRange",
+          {
+            params: {
+              beginDate: DateIdConverter(beginDate) + "00",
+              endDate: DateIdConverter(endDate) + "25",
+            },
+          }
+        );
+        const data = response.data;
+        setCities(data);
+      } catch (error) {
+        props.onError("Server is not responding");
+      }
     }
     if (beginDate !== "" && endDate !== "") {
       getCities();
