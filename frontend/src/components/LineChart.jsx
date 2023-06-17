@@ -65,6 +65,7 @@ export default function LineChart(props) {
 
   useEffect(() => {
     if (props.data.length == 0) return;
+    //console.log("props Data =", props.data);
     let chartDataset = {
       labels: [],
       datasets: [],
@@ -80,6 +81,7 @@ export default function LineChart(props) {
           data: [],
           borderColor: color,
           backgroundColor: color,
+          tension: 0.3,
         });
       }
     }
