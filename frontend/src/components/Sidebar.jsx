@@ -59,7 +59,7 @@ export default function Navbar(props) {
         backgroundColor: "lightblue",
       }}
     >
-      <SelectionPanel name="kraków" onSubmit={setChartData} />
+      <SelectionPanel onSubmit={setChartData} />
       {dataInfo && <DataInfoPanel data={dataInfo} />}
     </div>
   );

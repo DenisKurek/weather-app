@@ -32,7 +32,7 @@ export default function City(props) {
 
   return (
     <form
-      className="d-flex flex-wrap m-3"
+      className="d-flex flex-wrap bg-info p-4"
       style={{
         flexDirection: "column",
       }}
@@ -41,8 +41,10 @@ export default function City(props) {
         props.onSubmit(selectedCity.current.value, beginDate, endDate);
       }}
     >
-      <div>
-        <label htmlFor="DatePicker">Select Date: </label>
+      <div className="mb-3">
+        <label htmlFor="DatePicker" className="form-label">
+          Select Date:
+        </label>
         <Flatpickr
           id="DatePicker"
           options={{ mode: "range" }}
@@ -54,19 +56,33 @@ export default function City(props) {
               setDatesSelected(true);
             }
           }}
+          className="form-control"
         />
       </div>
 
-      <div>
-        <label city="cities">City:</label>
-        <select name="cities" id="cities" ref={selectedCity}>
+      <div className="mb-3">
+        <label htmlFor="cities" className="form-label">
+          City:
+        </label>
+        <select
+          name="cities"
+          id="cities"
+          ref={selectedCity}
+          className="form-select"
+        >
           {cities.map((city) => (
-            <option value={city.idArchive}>{city.city}</option>
+            <option value={city.idArchive} key={city.idArchive}>
+              {city.city}
+            </option>
           ))}
         </select>
       </div>
 
-      {datesSelected && <button type="submit">Submit</button>}
+      {datesSelected && (
+        <button type="submit" className="btn btn-primary">
+          Submit
+        </button>
+      )}
     </form>
   );
 }

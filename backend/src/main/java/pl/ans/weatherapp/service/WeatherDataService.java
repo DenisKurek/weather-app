@@ -18,7 +18,6 @@ public class WeatherDataService {
     }
 
     public List<WeatherData> getDataForStation(String stationId, String beginDate, String endDate) {
-        System.out.println("stationId = " + stationId+ " beginDate = " + beginDate+ " endDate = " +endDate);
         return repository.findAllDataBetweenDatesIds(stationId,beginDate,endDate);
     }
 

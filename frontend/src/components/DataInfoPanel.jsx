@@ -4,7 +4,7 @@ export default function DataInfoPanel(props) {
   const [selectedData, setSelectedDAta] = useState(null);
 
   function getInfo(label) {
-    if (label == null) return;
+    if (label === null) return;
     const dataInfo = [];
     for (let [key, value] of Object.entries(
       props.data.filter((data) => data.label === label)[0]
@@ -18,7 +18,7 @@ export default function DataInfoPanel(props) {
   }
   return (
     <div
-      className="d-flex flex-wrap border m-1"
+      className="d-flex flex-wrap border bg-info p-4"
       style={{
         flexGrow: 1,
         backgroundColor: "lightblue",
@@ -26,15 +26,17 @@ export default function DataInfoPanel(props) {
       }}
     >
       <select
+        className="form-select"
         name="data"
         id="cities"
         onChange={(e) => setSelectedDAta(e.target.value)}
       >
-        <option value={null}>{"select data"}</option>
+        <option value={null}>{null}</option>
         {props.data.map((data) => (
           <option value={data.label}>{data.label}</option>
         ))}
       </select>
+      <br />
       {selectedData &&
         getInfo(selectedData).map((data) => {
           return (

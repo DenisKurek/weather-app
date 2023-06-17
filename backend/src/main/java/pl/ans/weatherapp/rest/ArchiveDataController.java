@@ -15,13 +15,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/")
-public class DemoController {
+public class ArchiveDataController {
 
     private  final WeatherDataService weatherDataService;
     private  final CityService cityService;
 
     @Autowired()
-    public DemoController(WeatherDataService weatherDataService, CityService cityService) {
+    public ArchiveDataController(WeatherDataService weatherDataService, CityService cityService) {
         this.weatherDataService = weatherDataService;
         this.cityService = cityService;
     }
