@@ -39,7 +39,7 @@ export default function Navbar(props) {
       const data = response.data;
       console.log(data.length);
       props.onReciveData(data);
-      if (data.length == 0) return;
+      if (data.length === 0) return;
 
       let tempDataInfo = [];
       for (let key in data[0]) {
@@ -64,7 +64,6 @@ export default function Navbar(props) {
   return (
     <div
       style={{
-        backgroundColor: "grey",
         hight: "100%",
         width: "400px",
         backgroundColor: "lightblue",

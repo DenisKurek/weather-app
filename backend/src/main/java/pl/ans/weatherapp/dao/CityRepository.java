@@ -13,6 +13,6 @@ import java.util.List;
 public interface CityRepository extends JpaRepository<City,Integer> {
     List<City> findAllByIdArchiveIn(Collection<String> data);
 
-    @Query("select distinct c from City c inner join WeatherData wd on wd.stationId = c.idArchive WHERE wd.dateId >= :beginDate AND wd.dateId <= :endDate")
+    @Query("select distinct c from City c inner join WeatherData wd on wd.stationId = c.idArchive WHERE wd.dateId >= :beginDate AND wd.dateId <= :endDate ORDER BY c.city")
     List<City> getCitiesFromRange(String beginDate, String endDate);
 }

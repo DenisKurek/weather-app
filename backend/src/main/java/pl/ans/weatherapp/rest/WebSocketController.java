@@ -7,6 +7,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import pl.ans.weatherapp.utils.RandomNumberGenerator;
 
+import java.time.LocalDateTime;
+
 @Controller
 public class WebSocketController {
 
@@ -28,6 +30,8 @@ public class WebSocketController {
         temp = RandomNumberGenerator.modify(temp);
         humidity = RandomNumberGenerator.modify(humidity);
         pressure = RandomNumberGenerator.modify(pressure);
+        var now = LocalDateTime.now();
+        String label = "%s:%s:%s".formatted(now.getHour(),now.getMinute(),now.getSecond());
 
         String dummyResponse = """
                 {
@@ -37,9 +41,9 @@ public class WebSocketController {
                          "pressure": %s,
                          "humidity": %s
                      },
-                 "dt": "dummyData"
+                 "dt": "%s"
                 }
-                """.formatted(temp,pressure,humidity);
+                """.formatted(temp,pressure,humidity,label);
 
         messagingTemplate.convertAndSend("/topic/greetings", dummyResponse);
     }

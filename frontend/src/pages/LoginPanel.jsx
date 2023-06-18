@@ -41,16 +41,19 @@ export async function action({ request }) {
   const data = await request.formData();
   const username = data.get("username");
   const password = data.get("password");
-  console.log(data);
-  console.log("login parameters: ", username, password);
-  const response = await axios.post("http://localhost:8080/api/signUp", {
-    username: username,
-    password: password,
-  });
+  try {
+    const response = await axios.post("http://localhost:8080/api/signUp", {
+      username: username,
+      password: password,
+    });
 
-  if (response.status === 401) {
-    return response;
+    if (response.status === 401) {
+      return response;
+    }
+    storeAuthToken(response.data);
+    return redirect("/current");
+  } catch (error) {
+    console.log(error);
+    return null;
   }
-  storeAuthToken(response.data);
-  return redirect("/current");
 }

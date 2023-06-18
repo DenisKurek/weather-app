@@ -51,9 +51,17 @@ export default function City(props) {
         </label>
         <Flatpickr
           id="DatePicker"
-          options={{ mode: "range" }}
+          options={{
+            mode: "range",
+            defaultDate: ["2012-12-21", "2012-12-22"],
+            enable: [
+              {
+                from: "1960-01-01",
+                to: "2022-12-12",
+              },
+            ],
+          }}
           onChange={(selectedDates) => {
-            console.log(selectedDates);
             if (selectedDates.length === 2) {
               setBeginDate(selectedDates[0]);
               setEndDate(selectedDates[1]);

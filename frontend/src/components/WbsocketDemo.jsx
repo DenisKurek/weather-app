@@ -3,7 +3,6 @@ import SockJS from "sockjs-client";
 import Stomp from "stompjs";
 import ErrorMessage from "../UI/ErrorMessage";
 import Loader from "../UI/Loader";
-import { getAuthToken } from "../utils/Auth";
 import LineChart from "./LineChart";
 
 export default function WebSocketComponent() {
