@@ -1,5 +1,6 @@
 import { Link, useRouteLoaderData } from "react-router-dom";
 import { Form } from "react-router-dom";
+import { getRole } from "../utils/Auth";
 
 export default function Navbar(props) {
   const token = useRouteLoaderData("root");
@@ -21,6 +22,13 @@ export default function Navbar(props) {
           <li className="nav-item">
             <Link to="/current" className="nav-link">
               Current
+            </Link>
+          </li>
+        )}
+        {getRole() === "ADMIN" && (
+          <li className="nav-item">
+            <Link to="/users" className="nav-link">
+              Users
             </Link>
           </li>
         )}

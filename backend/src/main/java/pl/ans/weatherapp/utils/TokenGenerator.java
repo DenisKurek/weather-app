@@ -9,6 +9,7 @@ public class TokenGenerator {
     public static String generateToken(User user ,String secretKey) {
         return Jwts.builder()
                 .setSubject(user.getUsername())
+                .claim("roles", user.getRole())
                 .signWith(SignatureAlgorithm.HS256, secretKey.getBytes())
                 .compact();
     }

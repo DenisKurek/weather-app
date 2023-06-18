@@ -5,17 +5,20 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "users")
 @Getter
+@Setter
 public class User {
 
     public User(){}
 
-    public User(String username, String password){
+    public User(String username, String password ,String role){
         this.username = username;
         this.password = password;
+        this.role = role;
     }
 
     @Id
@@ -24,4 +27,7 @@ public class User {
 
     @Column(name="password", nullable = false)
     private String password;
+
+    @Column(name="role", nullable = false)
+    private String role;
 }

@@ -51,7 +51,6 @@ export async function action({ request }) {
   if (response.status === 401) {
     return response;
   }
-
   storeAuthToken(response.data);
   return redirect("/current");
 }

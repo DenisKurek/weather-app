@@ -29,6 +29,7 @@ public class SecurityConfig {
                 .requestMatchers("/api/signUp").permitAll()
                 .requestMatchers("/topic/greetings").permitAll()
                 .requestMatchers("/ws/**").permitAll()
+                .requestMatchers("/users/**").hasAnyRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .oauth2ResourceServer().jwt();

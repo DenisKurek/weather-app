@@ -5,8 +5,9 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RootLayout from "./pages/RootLayout";
 import LoginPanel from "./pages/LoginPanel";
 import { action as authAction } from "./pages/LoginPanel";
-import { checkAuthLoader, tokenLoader } from "./utils/Auth";
+import { checkAuthLoader, checkRoleLoader, tokenLoader } from "./utils/Auth";
 import { action as logoutAction } from "./pages/Logout";
+import UserManagmentPage from "./pages/UserManagmentPage";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,11 @@ const router = createBrowserRouter([
         path: "/current",
         element: <CurentDataPage />,
         loader: checkAuthLoader,
+      },
+      {
+        path: "/users",
+        element: <UserManagmentPage />,
+        loader: checkRoleLoader,
       },
       { path: "/logout", action: logoutAction },
     ],
