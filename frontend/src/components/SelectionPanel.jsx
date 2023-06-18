@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import Flatpickr from "react-flatpickr";
 import "flatpickr/dist/themes/airbnb.css";
-import axios from "axios";
+import axiosInstance from "../utils/authInterceptor";
 import DateIdConverter from "../utils/DateIdConverter";
 
 export default function City(props) {
@@ -14,7 +14,7 @@ export default function City(props) {
   useEffect(() => {
     async function getCities() {
       try {
-        const response = await axios.get(
+        const response = await axiosInstance.get(
           "http://localhost:8080/api/citiesForDateRange",
           {
             params: {
