@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import axiosInstance from "../../utils/authInterceptor";
 import axios from "axios";
 import WeatherDisplay from "./WeatherDisplay";
 import LocationSelectionForm from "./LocationForm";
@@ -13,7 +14,9 @@ export default function WeatherPanel(props) {
   useEffect(() => {
     async function getAppid() {
       try {
-        const response = await axios.get("http://localhost:8080/api/appid");
+        const response = await axiosInstance.get(
+          "http://localhost:8080/api/appid"
+        );
         setAppid(response.data);
       } catch (error) {
         setError("server is not responding");
