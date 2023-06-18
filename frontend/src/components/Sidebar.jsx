@@ -1,7 +1,7 @@
 import DataInfoPanel from "./DataInfoPanel";
 import SelectionPanel from "./SelectionPanel";
 import { useState } from "react";
-import axios from "axios";
+import axiosInstance from "../utils/authInterceptor";
 import ErrorMessage from "../UI/ErrorMessage";
 
 export default function Navbar(props) {
@@ -25,13 +25,17 @@ export default function Navbar(props) {
       })
       .split("/");
     try {
-      const response = await axios.get("http://localhost:8080/api/data", {
-        params: {
-          stationId: city,
-          beginDate: beginDateArr[2] + beginDateArr[1] + beginDateArr[0] + "00",
-          endDate: endDateArr[2] + endDateArr[1] + endDateArr[0] + "25",
-        },
-      });
+      const response = await axiosInstance.get(
+        "http://localhost:8080/api/data",
+        {
+          params: {
+            stationId: city,
+            beginDate:
+              beginDateArr[2] + beginDateArr[1] + beginDateArr[0] + "00",
+            endDate: endDateArr[2] + endDateArr[1] + endDateArr[0] + "25",
+          },
+        }
+      );
       const data = response.data;
       console.log(data.length);
       props.onReciveData(data);
